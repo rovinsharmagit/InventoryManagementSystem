@@ -1,0 +1,7 @@
+﻿@using Application.Service
+@using Microsoft.AspNetCore.Authorization
+@using WebUI.Components.Layout.Identity
+@using System.Security.Claims
+@layout AuthenticationLayout
+@attribute [AllowAnonymous]
+@inject IAccountService accountService
