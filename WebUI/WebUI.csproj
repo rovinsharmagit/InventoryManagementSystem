@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Components\Pages\Identity\AuthenticationPage.razor" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
@@ -23,6 +20,7 @@
     <PackageReference Include="NetcodeHub.Packages.Components.Modal" Version="1.0.0" />
     <PackageReference Include="NetcodeHub.Packages.Components.Toast" Version="1.0.4" />
     <PackageReference Include="NetcodeHub.Packages.Components.Validations" Version="1.0.1" />
+    <PackageReference Include="NetcodeHub.Packages.Extensions.LocalStorage" Version="1.0.0" />
     <PackageReference Include="NetcodeHub.Packages.UI.Templates.Breeze" Version="1.0.8" />
     <PackageReference Include="Syncfusion.Blazor.Charts" Version="25.2.4" />
     <PackageReference Include="Syncfusion.Blazor.Grid" Version="25.2.4" />
@@ -33,17 +31,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Components\Pages\Identity\AuthenticationPage.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Components\Pages\Identity\AuthenticationPage.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Components\Pages\Identity\AuthenticationPage.razor" />
   </ItemGroup>
 </Project>

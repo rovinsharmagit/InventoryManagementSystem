@@ -4,6 +4,7 @@ using Infrastructure.DataAccess;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,7 +37,6 @@ namespace Infrastructure.DependencyInjection
                 });
             services.AddCascadingAuthenticationState();
             services.AddScoped<IAccount, Account>();
-
             return services;
         }
     }

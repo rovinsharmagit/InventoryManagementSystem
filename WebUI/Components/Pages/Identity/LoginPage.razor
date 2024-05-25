@@ -1,0 +1,68 @@
+﻿@page "/Account/Login"
+
+<EditForm Model="LoginModel" method="post" OnInvalidSubmit="LoginAsync" FormName="login" Enhance>
+    <div class="card border-primary shadow-lg text-dark p-5" style="border-radius:24px; min-width:300px">
+        <div class="card-header text-dark fs-4 border-primary">Login</div>
+        <div class="card-body" style="opacity:1">
+            <DataAnnotationsValidator />
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="LoginModel.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label for="email" class="form-label">Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <InputText type="password" @bind-Value="LoginModel.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                <label  for="password" class="form-label">User Password</label>
+            </div>
+            <div class="form-group align-content-end">
+                <button class="float-end btn btn-success mt-4 w-50" type="submit" style="position:absolute; right:0; margin:2px">Login</button>
+            </div>
+            <hr class="text-primary" />
+        </div>
+        <div class="card-footer mt-5">
+            @if (ErrorMessage != "")
+            {
+                <div class="alert alert-danger">
+                    @ErrorMessage
+                </div>
+            }
+            else
+            {
+                <ValidationSummary class="form-control text-danger text-decoration-none p-4" style="list-style:lower-latin; text-align:left" />
+            }
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    string ErrorMessage = "";
+    public bool IsBusy { get; set; } = false;
+
+    [SupplyParameterFromForm]
+    private LoginUserRequestDTO LoginModel { get; set; } = new();
+    private async Task LoginAsync()
+    {
+        if (IsBusy) return;
+        ErrorMessage = "";
+        IsBusy = true;
+        var response = await accountService.LoginAsync(LoginModel);
+        if (!response.Flag)
+        {
+            IsBusy = false;
+            ErrorMessage = response.Message;
+            return;
+        }
+        IsBusy = false;
+        NavManager.NavigateTo(uri: "app/home", true);
+    }
+    [CascadingParameter]
+    public Task<AuthenticationState>? ClientAuthState { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if ((await ClientAuthState!).User.Identity!.IsAuthenticated == true)
+                NavManager.NavigateTo("app/home", false, true);
+        }
+        catch{}
+    }
+}

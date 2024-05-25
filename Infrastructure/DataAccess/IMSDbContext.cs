@@ -6,6 +6,6 @@ namespace Infrastructure.DataAccess
 {
     public class IMSDbContext(DbContextOptions<IMSDbContext> options) :
         IdentityDbContext<ApplicationUser>(options)
-    {
-    }
+    { }
+    
 }
